@@ -22,18 +22,15 @@ request('https://nsapiv3.herokuapp.com/api/v3/version',
   (error, response, body) => console.log(body));
 ```
 Sample result:
-```json
-{
-  "status": 200,
-  "result": {
-    "version": "14.1.0",
-    "apiVersion": "3.0.2-alpha",
-    "srvDate": 1609402081548,
-    "storage": {
-      "storage": "mongodb",
-      "version": "4.2.11"
-    }
-  }
+```javascript
+{  
+   "version":"0.12.2",
+   "apiVersion":"3.0.0-alpha",
+   "srvDate":1564386001772,
+   "storage":{  
+      "storage":"mongodb",
+      "version":"3.6.12"
+   }
 }
 ```
 
@@ -53,25 +50,22 @@ request(`https://nsapiv3.herokuapp.com/api/v3/status?${auth}`,
   (error, response, body) => console.log(body));
 ```
 Sample result:
-```json
-{
-  "status": 200,
-  "result": {
-    "version": "14.1.0",
-    "apiVersion": "3.0.2-alpha",
-    "srvDate": 1609427571833,
-    "storage": {
-      "storage": "mongodb",
-      "version": "4.2.11"
-    },
-    "apiPermissions": {
-      "devicestatus": "crud",
-      "entries": "crud",
-      "food": "crud",
-      "profile": "crud",
-      "settings": "crud",
-      "treatments": "crud"
-    }
+```javascript
+{  
+  "version":"0.12.2",
+  "apiVersion":"3.0.0-alpha",
+  "srvDate":1564391740738,
+  "storage":{  
+    "storage":"mongodb",
+    "version":"3.6.12"
+  },
+  "apiPermissions":{  
+    "devicestatus":"crud",
+    "entries":"crud",
+    "food":"crud",
+    "profile":"crud",
+    "settings":"crud",
+    "treatments":"crud"
   }
 }
 ```
@@ -92,27 +86,24 @@ request(`https://nsapiv3.herokuapp.com/api/v3/entries?${auth}&sort$desc=date&lim
   (error, response, body) => console.log(body));
 ```
 Sample result:
-```json
-{
-  "status": 200, 
-  "result": [  
-    {  
-      "dateString": "2019-07-30T02:24:50.434+0200",
-      "sgv": 115,
-      "direction": "FortyFiveDown"
-    },
-    {  
-      "dateString": "2019-07-30T02:19:50.374+0200",
-      "sgv": 121,
-      "direction": "FortyFiveDown"
-    },
-    {  
-      "dateString": "2019-07-30T02:14:50.450+0200",
-      "sgv": 129,
-      "direction": "FortyFiveDown"
-    }
-  ]
-}
+```
+[  
+  {  
+    "dateString":"2019-07-30T02:24:50.434+0200",
+    "sgv":115,
+    "direction":"FortyFiveDown"
+  },
+  {  
+    "dateString":"2019-07-30T02:19:50.374+0200",
+    "sgv":121,
+    "direction":"FortyFiveDown"
+  },
+  {  
+    "dateString":"2019-07-30T02:14:50.450+0200",
+    "sgv":129,
+    "direction":"FortyFiveDown"
+  }
+]
 ```
 
 
@@ -138,15 +129,11 @@ request({
     json: true,
     url: `https://nsapiv3.herokuapp.com/api/v3/treatments?${auth}`
   },
-  (error, response, body) => console.log(body));
+  (error, response, body) => console.log(response.headers.location));
 ```
 Sample result:
-```json
-{
-  "status": 201,
-  "identifier": "95e1a6e3-1146-5d6a-a3f1-41567cae0895",
-  "lastModified": 1564591511711
-}
+```
+/api/v3/treatments/95e1a6e3-1146-5d6a-a3f1-41567cae0895
 ```
 
 
@@ -165,22 +152,19 @@ request(`https://nsapiv3.herokuapp.com/api/v3/treatments/${identifier}?${auth}`,
   (error, response, body) => console.log(body));
 ```
 Sample result:
-```json
-{
-  "status": 200,
-  "result": {  
-    "date": 1564591511232,
-    "app": "AndroidAPS",
-    "device": "Samsung XCover 4-861536030196001",
-    "eventType": "Correction Bolus",
-    "insulin": 0.3,
-    "identifier": "95e1a6e3-1146-5d6a-a3f1-41567cae0895",
-    "utcOffset": 0,
-    "created_at": "2019-07-31T16:45:11.232Z",
-    "srvModified": 1564591627732,
-    "srvCreated": 1564591511711,
-    "subject": "test-admin"
-  }
+```
+{  
+  "date":1564591511232,
+  "app":"AndroidAPS",
+  "device":"Samsung XCover 4-861536030196001",
+  "eventType":"Correction Bolus",
+  "insulin":0.3,
+  "identifier":"95e1a6e3-1146-5d6a-a3f1-41567cae0895",
+  "utcOffset":0,
+  "created_at":"2019-07-31T16:45:11.232Z",
+  "srvModified":1564591627732,
+  "srvCreated":1564591511711,
+  "subject":"test-admin"
 }
 ```
 
@@ -199,17 +183,14 @@ request(`https://nsapiv3.herokuapp.com/api/v3/lastModified?${auth}`,
   (error, response, body) => console.log(body));
 ```
 Sample result:
-```json
+```javascript
 {  
-  "status": 200,
-  "result": {  
-    "srvDate": 1564591783202,
-    "collections": {  
-      "devicestatus": 1564591490074,
-      "entries": 1564591486801,
-      "profile": 1548524042744,
-      "treatments": 1564591627732
-    }
+  "srvDate":1564591783202,
+  "collections":{  
+    "devicestatus":1564591490074,
+    "entries":1564591486801,
+    "profile":1548524042744,
+    "treatments":1564591627732
   }
 }
 ```
@@ -239,13 +220,11 @@ request({
     json: true,
     url: `https://nsapiv3.herokuapp.com/api/v3/treatments/${identifier}?${auth}`
   },
-  (error, response, body) => console.log(body));
+  (error, response, body) => console.log(response.statusCode));
 ```
 Sample result:
-```json
-{
-  "status": 200
-}
+```
+204
 ```
 
 
@@ -269,13 +248,11 @@ request({
     json: true,
     url: `https://nsapiv3.herokuapp.com/api/v3/treatments/${identifier}?${auth}`
   },
-  (error, response, body) => console.log(body));
+  (error, response, body) => console.log(response.statusCode));
 ```
 Sample result:
-```json
-{
-  "status": 200
-}
+```
+204
 ```
 
 
@@ -294,13 +271,11 @@ request({
     method: 'delete',
     url: `https://nsapiv3.herokuapp.com/api/v3/treatments/${identifier}?${auth}`
   },
-  (error, response, body) => console.log(body));
+  (error, response, body) => console.log(response.statusCode));
 ```
 Sample result:
-```json
-{
-  "status": 200
-}
+```
+204
 ```
 
 
@@ -319,39 +294,36 @@ request(`https://nsapiv3.herokuapp.com/api/v3/treatments/history/${lastModified}
   (error, response, body) => console.log(response.body));
 ```
 Sample result:
-```json
-{
-  "status": 200,
-  "result": [
-    {
-      "date": 1564521267421,
-      "app": "AndroidAPS",
-      "device": "Samsung XCover 4-861536030196001",
-      "eventType": "Correction Bolus",
-      "insulin": 0.5,
-      "utcOffset": 0,
-      "created_at": "2019-07-30T21:14:27.421Z",
-      "identifier": "95e1a6e3-1146-5d6a-a3f1-41567cae0895",
-      "srvModified": 1564592440416,
-      "srvCreated": 1564592334853,
-      "subject": "test-admin",
-      "modifiedBy": "test-admin",
-      "isValid": false
-    },
-    {
-      "date": 1564592545299,
-      "app": "AndroidAPS",
-      "device": "Samsung XCover 4-861536030196001",
-      "eventType": "Snack Bolus",
-      "carbs": 10,
-      "identifier": "267c43c2-f629-5191-a542-4f410c69e486",
-      "utcOffset": 0,
-      "created_at": "2019-07-31T17:02:25.299Z",
-      "srvModified": 1564592545781,
-      "srvCreated": 1564592545781,
-      "subject": "test-admin"
-    }
-  ]
-}
+```
+[
+  {
+    "date":1564521267421,
+    "app":"AndroidAPS",
+    "device":"Samsung XCover 4-861536030196001",
+    "eventType":"Correction Bolus",
+    "insulin":0.5,
+    "utcOffset":0,
+    "created_at":"2019-07-30T21:14:27.421Z",
+    "identifier":"95e1a6e3-1146-5d6a-a3f1-41567cae0895",
+    "srvModified":1564592440416,
+    "srvCreated":1564592334853,
+    "subject":"test-admin",
+    "modifiedBy":"test-admin",
+    "isValid":false
+  },
+  {
+    "date":1564592545299,
+    "app":"AndroidAPS",
+    "device":"Samsung XCover 4-861536030196001",
+    "eventType":"Snack Bolus",
+    "carbs":10,
+    "identifier":"267c43c2-f629-5191-a542-4f410c69e486",
+    "utcOffset":0,
+    "created_at":"2019-07-31T17:02:25.299Z",
+    "srvModified":1564592545781,
+    "srvCreated":1564592545781,
+    "subject":"test-admin"
+  }
+]
 ```
 Notice the `"isValid":false` field marking the deletion of the document.
