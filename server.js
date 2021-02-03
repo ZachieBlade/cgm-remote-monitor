@@ -28,7 +28,7 @@
 
 const fs = require('fs');
 const env = require('./env')( );
-const language = require('../language')();
+const language = require('./lib/language')();
 const translate = language.set(env.settings.language).translate;
 language.loadLocalization(fs);
 
@@ -47,7 +47,7 @@ function create (app) {
   return transport.createServer(app);
 }
 
-require('./bootevent')(env, language).boot(function booted (ctx) {
+require('./lib/server/bootevent')(env, language).boot(function booted (ctx) {
 
     console.log('Boot event processing completed');
     
@@ -68,7 +68,7 @@ require('./bootevent')(env, language).boot(function booted (ctx) {
     ///////////////////////////////////////////////////
     // setup socket io for data and message transmission
     ///////////////////////////////////////////////////
-    var websocket = require('./websocket')(env, ctx, server);
+    var websocket = require('./lib/server/websocket')(env, ctx, server);
 
     ctx.bus.on('data-processed', function() {
       websocket.update();
